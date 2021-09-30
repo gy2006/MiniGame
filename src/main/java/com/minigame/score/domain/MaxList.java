@@ -50,9 +50,7 @@ public class MaxList {
         if (in.getScore() > max) {
             list.addFirst(in);
             max = in.getScore();
-
-            list.pollLast();
-            min = list.getLast().getScore();
+            resetMin();
             return;
         }
 
@@ -60,12 +58,16 @@ public class MaxList {
         for (UserScore item : list) {
             if (item.getScore() < in.getScore()) {
                 list.add(i, in);
-                list.pollLast();
-                min = list.getLast().getScore();
+                resetMin();
                 return;
             }
             i++;
         }
+    }
+
+    private void resetMin() {
+        list.pollLast();
+        min = list.getLast().getScore();
     }
 
     private void addWhenNotFull(UserScore in) {
