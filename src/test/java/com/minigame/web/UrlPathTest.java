@@ -1,6 +1,5 @@
-package com.minigame;
+package com.minigame.web;
 
-import com.minigame.web.UrlPath;
 import com.sun.net.httpserver.HttpExchange;
 import org.junit.Assert;
 import org.junit.Test;

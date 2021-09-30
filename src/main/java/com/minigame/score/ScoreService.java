@@ -4,7 +4,7 @@ public interface ScoreService {
 
     ScoreService Instance = new ScoreServiceImpl();
 
-    void addScoreToLevel(int userId, int score, int levelId);
+    void addScoreToLevel( int levelId, int userId, int score);
 
     String highScoresForLevel(int levelId);
 }

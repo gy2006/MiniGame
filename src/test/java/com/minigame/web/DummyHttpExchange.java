@@ -1,4 +1,4 @@
-package com.minigame;
+package com.minigame.web;
 
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpContext;

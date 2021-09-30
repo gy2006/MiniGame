@@ -1,4 +1,4 @@
-package com.minigame;
+package com.minigame.util;
 
 import com.minigame.util.SimpleCache;
 import org.junit.Assert;
