@@ -4,7 +4,7 @@ import com.minigame.web.HTTP;
 import com.minigame.web.RequestHandler;
 import com.sun.net.httpserver.HttpExchange;
 
-public class LoginRequestHandler implements RequestHandler {
+public class LoginRequestHandler extends RequestHandler {
 
     private final static String PATH_VAR_USER_ID = "userid";
 
@@ -24,8 +24,7 @@ public class LoginRequestHandler implements RequestHandler {
 
     @Override
     public String handleRequest(HttpExchange exchange) {
-        Object userIdAtt = exchange.getAttribute(PATH_VAR_USER_ID);
-        int userId = Integer.parseUnsignedInt(userIdAtt.toString());
+        int userId = getIntValue(exchange, PATH_VAR_USER_ID);
         return userService.login(userId);
     }
 }

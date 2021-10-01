@@ -2,6 +2,7 @@ package com.minigame.score.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class Score {
 
@@ -15,6 +16,10 @@ public class Score {
 
     public Integer getLevel() {
         return level;
+    }
+
+    public Optional<Integer> get(int userId) {
+        return Optional.ofNullable(userScoreMap.get(userId));
     }
 
     public void plus(int userId, int score) {

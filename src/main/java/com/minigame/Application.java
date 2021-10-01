@@ -1,5 +1,6 @@
 package com.minigame;
 
+import com.minigame.score.web.PostScoreHandler;
 import com.minigame.user.LoginRequestHandler;
 import com.minigame.web.UrlMappingHandler;
 import com.sun.net.httpserver.HttpServer;
@@ -29,6 +30,7 @@ public class Application {
 
         server.createContext("/", new UrlMappingHandler()
                 .registerHandler(new LoginRequestHandler())
+                .registerHandler(new PostScoreHandler())
         );
 
         server.start();

@@ -7,6 +7,8 @@ import java.nio.charset.StandardCharsets;
 
 public abstract class StringHelper {
 
+    public static String EMPTY_STRING = "";
+
     public static boolean isNullOrEmpty(String input) {
         return input == null || input.isEmpty();
     }

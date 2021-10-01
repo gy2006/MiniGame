@@ -5,6 +5,7 @@ import com.minigame.util.SimpleCache;
 
 import java.time.temporal.ChronoUnit;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -12,7 +13,7 @@ import java.util.logging.Logger;
 
 public class UserServiceImpl implements UserService {
 
-    private final Logger logger = Logger.getLogger(UserService.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(UserService.class.getName());
 
     private final SimpleCache<String, User> sessionStore = new SimpleCache<>(10, ChronoUnit.MINUTES);
 
@@ -25,14 +26,14 @@ public class UserServiceImpl implements UserService {
             userDB.put(user.getId(), user);
         });
 
-        logger.log(Level.INFO, String.format("%d users loaded", userDB.size()));
+        LOGGER.log(Level.INFO, String.format("%d users loaded", userDB.size()));
     }
 
     @Override
     public String login(Integer userId) {
         User user = userDB.get(userId);
         if (user == null) {
-            throw Exceptions.USER_NOT_EXIST;
+            throw new RuntimeException("User is not existed");
         }
 
         synchronized (user.getId()) {
@@ -49,7 +50,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isLoggedIn(String sessionKey) {
-        return sessionStore.get(sessionKey) != null;
+    public Optional<User> getUser(String sessionKey) {
+        return Optional.ofNullable(sessionStore.get(sessionKey));
     }
 }

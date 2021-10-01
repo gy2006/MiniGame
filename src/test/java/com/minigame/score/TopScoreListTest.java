@@ -1,6 +1,7 @@
 package com.minigame.score;
 
 import com.minigame.score.domain.TopScoreList;
+import com.minigame.util.StringHelper;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,7 +10,7 @@ public class TopScoreListTest {
     @Test
     public void shouldHandleListCorrectly() {
         TopScoreList list = new TopScoreList(3);
-        Assert.assertEquals("", list.toString());
+        Assert.assertEquals(StringHelper.EMPTY_STRING, list.toString());
 
         // first value should be added
         list.plus(1, 20);

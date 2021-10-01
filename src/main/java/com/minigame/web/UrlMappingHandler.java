@@ -24,6 +24,7 @@ public class UrlMappingHandler implements HttpHandler {
                     urlPath.parsePathVarsToHttpExchange(exchange);
                     urlPath.parseUrlParametersToHttpExchange(exchange);
 
+
                     String response = handler.handleRequest(exchange);
                     writeMessageToResponse(exchange, response, HTTP.STATUS_CODE_200);
                     return;
