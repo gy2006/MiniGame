@@ -44,6 +44,16 @@ public class PostScoreTest extends HttpServerScenario {
     }
 
     @Test
+    public void shouldGetHtt400IfScoreIsEmpty() throws IOException {
+        Response sessionKey = httpGet("/1001/login");
+        Assert.assertEquals(HTTP.STATUS_CODE_200, sessionKey.code);
+
+        Response newScore = httpPost("/1/score?sessionkey=" + sessionKey.body, StringHelper.EMPTY_STRING);
+        Assert.assertEquals(HTTP.STATUS_CODE_400, newScore.code);
+        Assert.assertEquals("invalid score number", newScore.body);
+    }
+
+    @Test
     public void shouldPostNewScore() throws IOException {
         // init: login
         Response sessionKey = httpGet("/1001/login");

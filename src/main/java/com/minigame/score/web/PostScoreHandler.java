@@ -36,7 +36,11 @@ public class PostScoreHandler extends RequestHandler {
     }
 
     private int getScore(HttpExchange exchange) throws IOException {
-        InputStream is = exchange.getRequestBody();
-        return Integer.parseUnsignedInt(StringHelper.toString(is));
+        try {
+            InputStream is = exchange.getRequestBody();
+            return Integer.parseUnsignedInt(StringHelper.toString(is));
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("invalid score number");
+        }
     }
 }
