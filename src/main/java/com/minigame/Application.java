@@ -29,17 +29,15 @@ public class Application {
         final int port = getIntEnvVar("MINIGAME_PORT", 8080);
         final int minPoolSize = getIntEnvVar("MINIGAME_MIN_POOL_SIZE", 20);
         final int maxPoolSize = getIntEnvVar("MINIGAME_MAX_POOL_SIZE", 200);
-        final int keepAliveTime = getIntEnvVar("MINIGAME_KEEP_ALIVE_TIME", 5000);
 
         LOGGER.log(Level.INFO, String.format("host: %s", host));
         LOGGER.log(Level.INFO, String.format("port: %s", port));
         LOGGER.log(Level.INFO, String.format("min pool size: %s", minPoolSize));
         LOGGER.log(Level.INFO, String.format("max pool size: %s", maxPoolSize));
-        LOGGER.log(Level.INFO, String.format("keep alive time: %s", keepAliveTime));
 
         HttpServer server = HttpServer.create(new InetSocketAddress(host, port), 0);
 
-        server.setExecutor(new ThreadPoolExecutor(minPoolSize, maxPoolSize, keepAliveTime, TimeUnit.SECONDS,
+        server.setExecutor(new ThreadPoolExecutor(minPoolSize, maxPoolSize, 10, TimeUnit.SECONDS,
                 new LinkedBlockingDeque<>(minPoolSize),
                 new RejectedExecutionHandler() {
                     @Override
