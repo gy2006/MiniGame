@@ -45,7 +45,8 @@ public class ScoreServiceImpl implements ScoreService {
 
     @Override
     public String topScoresForLevel(int levelId) {
-        return null;
+        TopScoreList top = topScores.get(levelId);
+        return top.toString();
     }
 
     private List<Integer> loadLevel() {

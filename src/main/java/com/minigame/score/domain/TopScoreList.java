@@ -69,6 +69,21 @@ public class TopScoreList {
         min = list.getLast().score;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder(10 * capacity);
+
+        for (UserScore item : list) {
+            builder.append(item.userId).append("=").append(item.score).append(",");
+        }
+
+        if (builder.length() > 0) {
+            builder.deleteCharAt(builder.length() - 1);
+        }
+
+        return builder.toString();
+    }
+
     private int compare(UserScore o1, UserScore o2) {
         return o2.score.compareTo(o1.score);
     }
