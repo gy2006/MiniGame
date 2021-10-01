@@ -1,6 +1,7 @@
 package com.minigame.user;
 
 import com.minigame.HttpServerScenario;
+import com.minigame.user.service.UserService;
 import com.minigame.web.HTTP;
 import org.junit.Assert;
 import org.junit.Test;

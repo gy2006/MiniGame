@@ -1,5 +1,6 @@
-package com.minigame.user;
+package com.minigame.user.web;
 
+import com.minigame.user.service.UserService;
 import com.minigame.web.HTTP;
 import com.minigame.web.RequestHandler;
 import com.sun.net.httpserver.HttpExchange;

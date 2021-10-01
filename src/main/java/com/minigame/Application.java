@@ -2,7 +2,7 @@ package com.minigame;
 
 import com.minigame.score.web.GetHighScoreListHandler;
 import com.minigame.score.web.PostScoreHandler;
-import com.minigame.user.LoginRequestHandler;
+import com.minigame.user.web.LoginRequestHandler;
 import com.minigame.web.UrlMappingHandler;
 import com.sun.net.httpserver.HttpServer;
 

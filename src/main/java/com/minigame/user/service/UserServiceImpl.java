@@ -1,5 +1,6 @@
-package com.minigame.user;
+package com.minigame.user.service;
 
+import com.minigame.user.domain.User;
 import com.minigame.util.ResourceHelper;
 import com.minigame.util.SimpleCache;
 

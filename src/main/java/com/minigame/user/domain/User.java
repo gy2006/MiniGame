@@ -1,4 +1,4 @@
-package com.minigame.user;
+package com.minigame.user.domain;
 
 import java.util.Objects;
 

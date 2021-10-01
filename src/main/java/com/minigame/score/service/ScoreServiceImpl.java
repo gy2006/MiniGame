@@ -2,7 +2,7 @@ package com.minigame.score.service;
 
 import com.minigame.score.domain.TopScoreList;
 import com.minigame.score.domain.Score;
-import com.minigame.user.UserService;
+import com.minigame.user.service.UserService;
 import com.minigame.util.ResourceHelper;
 
 import java.util.*;

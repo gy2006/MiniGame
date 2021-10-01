@@ -1,7 +1,7 @@
 package com.minigame.web;
 
-import com.minigame.user.User;
-import com.minigame.user.UserService;
+import com.minigame.user.domain.User;
+import com.minigame.user.service.UserService;
 import com.sun.net.httpserver.HttpExchange;
 
 import java.util.Map;

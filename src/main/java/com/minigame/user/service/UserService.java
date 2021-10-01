@@ -1,4 +1,6 @@
-package com.minigame.user;
+package com.minigame.user.service;
+
+import com.minigame.user.domain.User;
 
 import java.util.Optional;
 
