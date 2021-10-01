@@ -1,7 +1,7 @@
 package com.minigame.score;
 
-import com.minigame.score.domain.LevelScore;
-import com.minigame.score.domain.UserScore;
+import com.minigame.score.domain.TopScoreList;
+import com.minigame.score.domain.Score;
 import com.minigame.user.UserService;
 import com.minigame.util.ResourceHelper;
 
@@ -16,28 +16,35 @@ public class ScoreServiceImpl implements ScoreService {
 
     private final Logger logger = Logger.getLogger(UserService.class.getName());
 
-    private final Map<Integer, LevelScore> db;
+    private final Map<Integer, Score> db;
+
+    private final Map<Integer, TopScoreList> topScores;
 
     ScoreServiceImpl() {
         List<Integer> levels = loadLevel();
 
         db = new HashMap<>(levels.size());
+        topScores = new HashMap<>(levels.size());
+
         for (Integer level : levels) {
-            db.put(level, new LevelScore(level));
+            db.put(level, new Score(level));
+            topScores.put(level, new TopScoreList(15));
         }
     }
 
     @Override
     public void addScoreToLevel(int levelId, int userId, int score) {
-        LevelScore ls = db.get(levelId);
-        synchronized (ls.getLevel()) {
-            UserScore us = ls.getUserScore(userId);
-            us.add(score);
+        Score s = db.get(levelId);
+        TopScoreList top = topScores.get(levelId);
+
+        synchronized (s.getLevel()) {
+            s.plus(userId, score);
+            top.plus(userId, score);
         }
     }
 
     @Override
-    public String highScoresForLevel(int levelId) {
+    public String topScoresForLevel(int levelId) {
         return null;
     }
 

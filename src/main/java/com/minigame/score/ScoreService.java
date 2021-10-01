@@ -6,5 +6,5 @@ public interface ScoreService {
 
     void addScoreToLevel( int levelId, int userId, int score);
 
-    String highScoresForLevel(int levelId);
+    String topScoresForLevel(int levelId);
 }
