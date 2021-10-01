@@ -4,6 +4,7 @@ import com.minigame.HttpServerScenario;
 import com.minigame.score.service.ScoreService;
 import com.minigame.util.StringHelper;
 import com.minigame.web.HTTP;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,6 +13,11 @@ import java.io.IOException;
 public class PostScoreTest extends HttpServerScenario {
 
     private final ScoreService service = ScoreService.Instance;
+
+    @After
+    public void cleanUp() {
+        service.reset();
+    }
 
     @Test
     public void shouldGetHttp400IfSessionKeyIsMissing() throws IOException {

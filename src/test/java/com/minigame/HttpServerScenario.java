@@ -1,5 +1,6 @@
 package com.minigame;
 
+import com.minigame.score.web.GetHighScoreListHandler;
 import com.minigame.score.web.PostScoreHandler;
 import com.minigame.user.LoginRequestHandler;
 import com.minigame.util.StringHelper;
@@ -36,6 +37,7 @@ public abstract class HttpServerScenario {
         server.createContext("/", new UrlMappingHandler()
                 .registerHandler(new LoginRequestHandler())
                 .registerHandler(new PostScoreHandler())
+                .registerHandler(new GetHighScoreListHandler())
         );
         new Thread(() -> server.start()).start();
     }

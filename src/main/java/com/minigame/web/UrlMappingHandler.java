@@ -28,7 +28,7 @@ public class UrlMappingHandler implements HttpHandler {
                 }
             }
 
-            throw Exceptions.REQUEST_NOT_SUPPORT;
+            throw new RuntimeException("The request is not supported");
         } catch (Throwable e) {
             String err = e.getMessage();
             writeMessageToResponse(exchange, err, HTTP.STATUS_CODE_400);

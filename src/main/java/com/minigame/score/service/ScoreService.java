@@ -9,4 +9,6 @@ public interface ScoreService {
     void addScoreToLevel(int levelId, int userId, int score);
 
     String topScoresForLevel(int levelId);
+
+    void reset();
 }

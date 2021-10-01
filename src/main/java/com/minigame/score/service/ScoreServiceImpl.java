@@ -19,9 +19,10 @@ public class ScoreServiceImpl implements ScoreService {
 
     private final Map<Integer, TopScoreList> topScores;
 
-    ScoreServiceImpl() {
-        List<Integer> levels = loadLevel();
+    private final List<Integer> levels;
 
+    ScoreServiceImpl() {
+        levels = loadLevel();
         db = new HashMap<>(levels.size());
         topScores = new HashMap<>(levels.size());
 
@@ -50,8 +51,20 @@ public class ScoreServiceImpl implements ScoreService {
 
     @Override
     public String topScoresForLevel(int levelId) {
-        TopScoreList top = topScores.get(levelId);
+        Score score = getLevelScore(levelId);
+        TopScoreList top = topScores.get(score.getLevel());
         return top.toString();
+    }
+
+    @Override
+    public void reset() {
+        db.clear();
+        topScores.clear();
+
+        for (Integer level : levels) {
+            db.put(level, new Score(level));
+            topScores.put(level, new TopScoreList(TOP_SCORE_LIST_CAPACITY));
+        }
     }
 
     private Score getLevelScore(int levelId) {

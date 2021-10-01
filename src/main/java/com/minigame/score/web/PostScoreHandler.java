@@ -10,17 +10,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
+import static com.minigame.score.web.Constants.PATH_VAR_LEVEL_ID;
+
 public class PostScoreHandler extends RequestHandler {
-
-    private final static String PATH_VAR_LEVEL_ID = "levelId";
-
-    private final static String MAPPING = String.format("/{%s}/score", PATH_VAR_LEVEL_ID);
 
     private final ScoreService scoreService = ScoreService.Instance;
 
     @Override
     public String requestMapping() {
-        return MAPPING;
+        return Constants.POST_SCORE_MAPPING;
     }
 
     @Override
