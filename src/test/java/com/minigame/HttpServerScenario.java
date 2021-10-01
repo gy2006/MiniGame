@@ -27,9 +27,15 @@ public abstract class HttpServerScenario {
         public String body;
     }
 
-    private static final InetSocketAddress address = new InetSocketAddress("127.0.0.1", 8080);
+    private static final InetSocketAddress address;
 
     private static HttpServer server;
+
+    static {
+        String host = System.getenv().getOrDefault("MINIGAME_HOST", "127.0.0.1");
+        int port = Integer.parseUnsignedInt(System.getenv().getOrDefault("MINIGAME_PORT", "8080"));
+        address = new InetSocketAddress(host, port);
+    }
 
     @BeforeClass
     public static void startServer() throws IOException {

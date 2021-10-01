@@ -1,8 +1,7 @@
 package com.minigame.score.service;
 
-import com.minigame.score.domain.TopScoreList;
 import com.minigame.score.domain.Score;
-import com.minigame.user.service.UserService;
+import com.minigame.score.domain.TopScoreList;
 import com.minigame.util.ResourceHelper;
 
 import java.util.*;
@@ -13,7 +12,7 @@ public class ScoreServiceImpl implements ScoreService {
 
     private static final int TOP_SCORE_LIST_CAPACITY = 15;
 
-    private static final Logger LOGGER = Logger.getLogger(UserService.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ScoreService.class.getName());
 
     private final Map<Integer, Score> db;
 

@@ -58,6 +58,10 @@ public class UrlPath {
         this.regexPathPattern = Pattern.compile(regexPath + URL_PARAM_REGEX.pattern());
     }
 
+    public String getRawPath() {
+        return rawPath;
+    }
+
     public int getSizeOfPathVar() {
         return vars.size();
     }

@@ -8,8 +8,12 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UrlMappingHandler implements HttpHandler {
+
+    private static final Logger LOGGER = Logger.getLogger(UrlMappingHandler.class.getName());
 
     private final Map<UrlPath, RequestHandler> handlerMap = new HashMap<>();
 
@@ -36,7 +40,9 @@ public class UrlMappingHandler implements HttpHandler {
     }
 
     public UrlMappingHandler registerHandler(RequestHandler handler) {
-        handlerMap.put(new UrlPath(handler.requestMapping()), handler);
+        UrlPath urlPath = new UrlPath(handler.requestMapping());
+        handlerMap.put(urlPath, handler);
+        LOGGER.log(Level.INFO, String.format("url %s registered", urlPath.getRawPath()));
         return this;
     }
 
