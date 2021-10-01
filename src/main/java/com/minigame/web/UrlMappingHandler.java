@@ -21,11 +21,8 @@ public class UrlMappingHandler implements HttpHandler {
                 RequestHandler handler = entry.getValue();
 
                 if (urlPath.isMatch(exchange) && handler.isSupportHttpMethod(exchange.getRequestMethod())) {
-                    urlPath.parsePathVarsToHttpExchange(exchange);
-                    urlPath.parseUrlParametersToHttpExchange(exchange);
-
-
-                    String response = handler.handleRequest(exchange);
+                    Map<String, String> props = urlPath.parsePathVarAndParameter(exchange);
+                    String response = handler.handleRequest(exchange, props);
                     writeMessageToResponse(exchange, response, HTTP.STATUS_CODE_200);
                     return;
                 }

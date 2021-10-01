@@ -4,6 +4,8 @@ import com.sun.net.httpserver.HttpExchange;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Map;
+
 public class UrlPathTest {
 
     @Test
@@ -38,12 +40,11 @@ public class UrlPathTest {
         UrlPath path = new UrlPath("/{userid}/user/{name}");
 
         HttpExchange exchange = new DummyHttpExchange("/12/user/admin");
-        path.parsePathVarsToHttpExchange(exchange);
-        path.parseUrlParametersToHttpExchange(exchange);
+        Map<String, String> props = path.parsePathVarAndParameter(exchange);
 
-        Assert.assertEquals("12", exchange.getAttribute("userid"));
-        Assert.assertEquals("admin", exchange.getAttribute("name"));
-        Assert.assertNull(exchange.getAttribute("not_exist"));
+        Assert.assertEquals("12", props.get("userid"));
+        Assert.assertEquals("admin", props.get("name"));
+        Assert.assertNull(props.get("not_exist"));
     }
 
     @Test
@@ -51,11 +52,10 @@ public class UrlPathTest {
         UrlPath path = new UrlPath("/{userid}/user/{name}");
 
         HttpExchange exchange = new DummyHttpExchange("/12/user/admin?session=123&key=abc&uuid=");
-        path.parsePathVarsToHttpExchange(exchange);
-        path.parseUrlParametersToHttpExchange(exchange);
+        Map<String, String> props = path.parsePathVarAndParameter(exchange);
 
-        Assert.assertEquals("123", exchange.getAttribute("session"));
-        Assert.assertEquals("abc", exchange.getAttribute("key"));
-        Assert.assertNull(exchange.getAttribute("uuid"));
+        Assert.assertEquals("123", props.get("session"));
+        Assert.assertEquals("abc", props.get("key"));
+        Assert.assertNull(props.get("uuid"));
     }
 }

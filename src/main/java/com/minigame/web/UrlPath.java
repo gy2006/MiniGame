@@ -71,16 +71,23 @@ public class UrlPath {
         return regexPathPattern.matcher(lookupPath).matches();
     }
 
-    public void parsePathVarsToHttpExchange(HttpExchange exchange) {
+    public Map<String, String> parsePathVarAndParameter(HttpExchange exchange) {
+        Map<String, String> output = new HashMap<>(5);
+        parsePathVars(exchange, output);
+        parseUrlParameters(exchange, output);
+        return output;
+    }
+
+    private void parsePathVars(HttpExchange exchange, Map<String, String> output) {
         String lookupPath = exchange.getRequestURI().getPath();
         String[] tokens = lookupPath.split("/");
         for (PathVar var : vars) {
             String value = tokens[var.index];
-            exchange.setAttribute(var.name, value);
+            output.put(var.name, value);
         }
     }
 
-    public void parseUrlParametersToHttpExchange(HttpExchange exchange) {
+    private void parseUrlParameters(HttpExchange exchange, Map<String, String> output) {
         String query = exchange.getRequestURI().getQuery();
         if (StringHelper.isNullOrEmpty(query)) {
             return;
@@ -94,7 +101,7 @@ public class UrlPath {
         for (String param : parts[0].split("&")) {
             String[] pair = param.split("=");
             if (pair.length == 2) {
-                exchange.setAttribute(pair[0], pair[1]);
+                output.put(pair[0], pair[1]);
             }
         }
     }

@@ -4,6 +4,7 @@ import com.minigame.user.User;
 import com.minigame.user.UserService;
 import com.sun.net.httpserver.HttpExchange;
 
+import java.util.Map;
 import java.util.Optional;
 
 public abstract class RequestHandler {
@@ -12,14 +13,14 @@ public abstract class RequestHandler {
 
     public abstract boolean isSupportHttpMethod(String method);
 
-    public abstract String handleRequest(HttpExchange exchange) throws Exception;
+    public abstract String handleRequest(HttpExchange exchange, Map<String, String> props) throws Exception;
 
-    public int getIntValue(HttpExchange exchange, String name) {
-        return Integer.parseUnsignedInt(exchange.getAttribute(name).toString());
+    public int getIntValue(Map<String, String> props, String name) {
+        return Integer.parseUnsignedInt(props.get(name));
     }
 
-    public User getUser(HttpExchange exchange) {
-        Object sessionKey = exchange.getAttribute("sessionkey");
+    public User getUser(Map<String, String> props) {
+        Object sessionKey = props.get("sessionkey");
         if (sessionKey == null) {
             throw new RuntimeException("session key is required");
         }

@@ -8,6 +8,7 @@ import com.sun.net.httpserver.HttpExchange;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 public class PostScoreHandler extends RequestHandler {
 
@@ -28,9 +29,9 @@ public class PostScoreHandler extends RequestHandler {
     }
 
     @Override
-    public String handleRequest(HttpExchange exchange) throws Exception {
-        int userId = getUser(exchange).getId();
-        int levelId = getIntValue(exchange, PATH_VAR_LEVEL_ID);
+    public String handleRequest(HttpExchange exchange, Map<String, String> props) throws Exception {
+        int userId = getUser(props).getId();
+        int levelId = getIntValue(props, PATH_VAR_LEVEL_ID);
         int score = getScore(exchange);
         scoreService.addScoreToLevel(levelId, userId, score);
         return StringHelper.EMPTY_STRING;
